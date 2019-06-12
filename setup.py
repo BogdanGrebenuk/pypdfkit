@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/BogdanGrebenuk/pypdfkit",
     packages=setuptools.find_packages(),
-    install_requires=["pdfkit"],
+    install_requires=["pdfkit", "jinja2"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"

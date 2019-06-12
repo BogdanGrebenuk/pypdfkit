@@ -20,7 +20,7 @@ PyPDFKit is a wrapper for [pdfkit] package to create PDF-based reports.
     ```
     Warning! Version in debian/ubuntu repos have reduced functionality (because it compiled without the wkhtmltopdf QT patches), such as adding outlines, headers, footers, TOC etc. To use this options you should install static binary from wkhtmltopdf site or you can use this script.
 
-    Windows and other options: check wkhtmltopdf [homepage] for binary installers
+    Windows and other options: check wkhtmltopdf [homepage] for binary installers (don't forget to set the windows enviroment variables).
 
 # Usage
 

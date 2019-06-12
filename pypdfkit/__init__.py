@@ -12,4 +12,7 @@ __all__ = (
     + pyobj2html.__all__
     + pypdfkit.__all__
     + templatemanager.__all__
+    + ["name"]
 )
+
+name = "pypdfkit"

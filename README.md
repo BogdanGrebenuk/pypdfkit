@@ -34,17 +34,17 @@ class SimpleDataManager(pypdfkit.DefaultDataManager):
 
     def get_data(self):
         return [
-            ("ИПЗ-16-1", "Богдан", 20, "Python3"),
-            ("ИПЗ-16-1", "Данил", 21, "Java/JS"),
-            ("ИПЗ-16-1", "Иван", 21, "JS"),
-            ("ИПЗ-16-1", "Евгений", 22, "Ruby"),
-            ("ИПЗ-17-2", "Богдан", 20, "С#"),
-            ("ИПЗ-17-2", "Владислав", 20, "Python3"),
-            ("ИПЗ-18-1", "Евгений", 19, "С++"),
+            ("IPZ-16-1", "Bohdan", 20, "Python3"),
+            ("IPZ-16-1", "Danil", 21, "Java/JS"),
+            ("IPZ-16-1", "Ivan", 21, "JS"),
+            ("IPZ-16-1", "Eugene", 22, "Ruby"),
+            ("IPZ-17-2", "Bohdan", 20, "С#"),
+            ("IPZ-17-2", "Vlad", 20, "Python3"),
+            ("IPZ-18-1", "Eugene", 19, "С++"),
             ]
 
     def get_fields(self):
-        return ("Группа", "Имя", "Возраст", "ЯП")
+        return ("Group", "Name", "Age", "Lang")
 ```
 
 Create an object of your data-manager class and pass it to ReportBuilder constructor.
@@ -67,7 +67,7 @@ class ConfigureDataManager(pypdfkit.DefaultDataManager):
     def get_totals_info(self):
         return [ 
             pypdfkit.TotalsInfo(
-                "Сумма", 
+                "Sum", 
                 lambda x: sum([i[-2] for i in x]), 
                 1 # position of cell
                 )

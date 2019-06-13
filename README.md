@@ -55,7 +55,7 @@ report_builder = pypdfkit.ReportBuilder(data_manager)
 report_builder.create_report("Hello world!", "test_file_name.pdf")
 ```
 
-"create_report" method will create a file with name "test_file_name.pdf" and the title of report wii be "Hello world!".
+"create_report" method will create a file with name "test_file_name.pdf" and the title of report will be "Hello world!".
 
 # "Totals section" configuration
 

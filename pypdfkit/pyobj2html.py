@@ -1,6 +1,6 @@
 import collections
 
-from itertools import islice, groupby
+from itertools import groupby
 from typing import Iterable, List
 
 from . import abc_pdf
@@ -44,20 +44,34 @@ def _add_column(ranges, range_, column, value, quantity, empty):
     )
 
 
-def group(data, level=None, *, empty):
+def group(data, group_indexes=None, *, empty):
     """Function returns grouped data"""
     if not data or not data[0]: # если данных нет, возвращаем их
         return data
     # установка кол-ва столбцов для группировки
-    level = len(data[0])-1 if level is None else level
+    group_indexes = (
+        range(len(data[0])-1) 
+        if group_indexes is None 
+        else list(group_indexes)
+    )
     # храним группированные значения предыдущей колонки для текущей 
     prev_ranges = [] 
     new_data = [] # результат работы функции будет здесь
+    data_len = len(data)
     data = zip(*data) # транспонируем, чтобы идти по столбцам
-    for column in islice(data, level):
-        index = 0 # индекс указывает на позицию в столбце
+    for i, column in enumerate(data):
         acc_column = [] # храним группированные значения 
         curr_ranges = [] # храним индексы группировки 
+        if i not in group_indexes:
+            for j in range(data_len):
+                _add_column(
+                    curr_ranges, range(j, j + 1),
+                    acc_column, column[j], 1, empty 
+                )
+            new_data.append(acc_column)
+            prev_ranges = curr_ranges[:]
+            continue
+        index = 0 # индекс указывает на позицию в столбце
         for v, n in map(get_value_and_quantity, groupby(column)):
             curr_range = range(index, index + n)
             if (
@@ -98,8 +112,6 @@ def group(data, level=None, *, empty):
             index += n
         new_data.append(acc_column)
         prev_ranges = curr_ranges[:]
-    for column in data: # доисчерпываем итератор
-        new_data.append([entities.CellInfo(v, 1) for v in column])
     return list(zip(*new_data))
 
 
@@ -157,8 +169,8 @@ class PyObjToHtmlConverter(abc_pdf.AbstractPyObjToHtmlConverter):
         )
         return self.template_manager.render(table=html_table)
 
-    def convert_data(self, data, level=None, empty=Empty()):
-        grouped_data = group(data, level, empty=empty)
+    def convert_data(self, data, group_indexes=None, empty=Empty()):
+        grouped_data = group(data, group_indexes, empty=empty)
         html_data = to_html(grouped_data, empty=empty)
         return html_data
 

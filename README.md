@@ -17,7 +17,7 @@ PyPDFKit is a wrapper for [pdfkit] package to create PDF-based reports.
     macOS:
     ```sh
     $ brew install caskroom/cask/wkhtmltopdf
-    ``
+    ```
 
     Windows and other options: check wkhtmltopdf [homepage] for binary installers (don't forget to set the windows enviroment variables).
 
